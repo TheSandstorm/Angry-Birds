@@ -6,7 +6,6 @@
 #include <SOIL.h>
 #include "ShaderLoader.h"
 #include "Utility.h"
-#include "Model.h"
 
 enum Object_Attributes
 {
@@ -47,7 +46,6 @@ public:
 	static void DestroyInstance();
 
 	static std::shared_ptr<MESH> GetMesh(Object_Attributes _ObjectType);
-	static std::shared_ptr<Model> GetModel(Object_Attributes _ObjectType);
 
 	static GLuint GetShaderProgram(Shader_Attributes _ShaderType);
 
@@ -75,8 +73,5 @@ private:
 	static std::shared_ptr<MESH> SphereMesh;
 	static std::shared_ptr<MESH> PlaneMesh;
 	static std::shared_ptr<MESH> QuadTessMesh;
-
-	//Model ptrs
-	static std::shared_ptr<Model> Player;
 
 };

@@ -31,8 +31,8 @@ int main(int argc, char **argv)
 	glutSetOption(GLUT_MULTISAMPLE, 8);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutInitWindowPosition(50, 50);
-	glutInitWindowSize(800, 800);
-	glutCreateWindow("Triangle Cutter - John Strange");
+	glutInitWindowSize(ScreenInfo::SCR_HEIGHT, ScreenInfo::SCR_WIDTH);
+	glutCreateWindow("MEME Birds HD");
 	glEnable(GL_MULTISAMPLE);
 	//Sets up all gl function callbacks based on pc hardware
 	if (glewInit() != GLEW_OK)

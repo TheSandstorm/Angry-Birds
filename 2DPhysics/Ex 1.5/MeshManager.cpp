@@ -3,9 +3,6 @@
 std::shared_ptr<MESH> MeshManager::CubeMesh = nullptr;
 std::shared_ptr<MESH> MeshManager::SphereMesh = nullptr;
 std::shared_ptr<MESH> MeshManager::PlaneMesh = nullptr;
-std::shared_ptr<MESH> MeshManager::QuadTessMesh = nullptr;
-
-std::shared_ptr<Model> MeshManager::Player = nullptr;
 
 std::shared_ptr<MeshManager> MeshManager::ObjectManagerptr = nullptr;
 
@@ -16,9 +13,6 @@ GLuint MeshManager::FogModelShader;
 GLuint MeshManager::CubeMapShader;
 GLuint MeshManager::FogCubeMapShader;
 GLuint MeshManager::StencilShader;
-GLuint MeshManager::QuadTessShader;
-GLuint MeshManager::TriTessShader;
-GLuint MeshManager::GeometryShader;
 
 MeshManager::MeshManager()
 {
@@ -30,9 +24,6 @@ MeshManager::MeshManager()
 	ObjectShader = ShaderLoader::CreateProgram(Utility::ObjectShaderVert.data(), Utility::ObjectShaderFrag.data());
 	ModelShader = ShaderLoader::CreateProgram(Utility::ModelShaderVert.data(), Utility::ModelShaderFrag.data());
 	StencilShader = ShaderLoader::CreateProgram(Utility::ObjectShaderVert.data(), Utility::SingleColorShaderFrag.data());
-	TriTessShader = ShaderLoader::CreateProgram(Utility::TessShaderVert.data(), Utility::TessShaderFrag.data(), Utility::TessShaderTCSTri.data(), Utility::TessShaderTESTri.data());
-	QuadTessShader = ShaderLoader::CreateProgram(Utility::TessShaderVert.data(), Utility::TessShaderFrag.data(), Utility::TessShaderTCSQuad.data(), Utility::TessShaderTESQuad.data());
-	GeometryShader = ShaderLoader::CreateProgram(Utility::GeometryShaderVert.data() , Utility::ObjectShaderFrag.data(), Utility::GeometryShaderGeom.data());
 
 
 	//Defines Cube Vertices
@@ -114,7 +105,7 @@ MeshManager::MeshManager()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(CubeIndices), CubeIndices, GL_STATIC_DRAW);
 
 	//Setting the Mesh for the objects to use
-	CubeMesh = make_shared<MESH>();
+	CubeMesh = std::make_shared<MESH>();
 	CubeMesh->VAO = VAO;
 	CubeMesh->IndicesCount = sizeof(CubeIndices);
 
@@ -243,39 +234,6 @@ MeshManager::MeshManager()
 	PlaneMesh->VAO = VAO;
 	PlaneMesh->IndicesCount = sizeof(PlaneIndices);
 #pragma endregion
-
-	GLfloat points[] = {
-	-1.0f, -1.0f, 0.0f,
-	1.0f, -1.0f, 0.0f,
-	1.0f, 1.0f, 0.0f,
-	-1.0, 1.0, 0.0f
-	};
-	int TessIndices = 4;
-	glPatchParameteri(GL_PATCH_VERTICES, TessIndices);
-
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), &points, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(
-		0, 3,
-		GL_FLOAT, GL_FALSE,
-		3 * sizeof(GLfloat),
-		0
-	);
-
-	QuadTessMesh = std::make_shared<MESH>();
-	QuadTessMesh->VAO = VAO;
-	QuadTessMesh->IndicesCount = TessIndices;
-
-	glEnableVertexAttribArray(0);
-	glBindVertexArray(0);
-
-
-	Player = make_shared<Model>(Utility::PlayerModel.data(), ModelShader);
 }
 
 MeshManager::~MeshManager() 
@@ -283,7 +241,6 @@ MeshManager::~MeshManager()
 	CubeMesh = nullptr;
 	SphereMesh = nullptr;
 	PlaneMesh = nullptr;
-	Player = nullptr;
 }
 
 std::shared_ptr<MeshManager> MeshManager::GetInstance()
@@ -321,13 +278,6 @@ std::shared_ptr<MESH> MeshManager::GetMesh(Object_Attributes _ObjectType)
 		return QuadTessMesh;
 	}
 	}
-	return nullptr;
-}
-
-std::shared_ptr<Model> MeshManager::GetModel(Object_Attributes _ObjectType)
-{
-	if (_ObjectType == MODEL_PLAYER) return Player;
-
 	return nullptr;
 }
 
@@ -377,7 +327,7 @@ GLuint MeshManager::GetShaderProgram(Shader_Attributes _ShaderType)
 	}
 
 	}
-	wcout << "Failed to set shader\n";
+	std::wcout << "Failed to set shader\n";
 	return NULL;
 }
 

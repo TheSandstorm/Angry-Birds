@@ -1,9 +1,8 @@
 #pragma once
 #include "TextManager.h"
-#include "Object.h"
-#include "InputManager.h"
+#include "InputManger.h"
 #include "ShaderLoader.h"
-#include <glm.hpp>
+#include "Utility.h"
 
 enum SceneState {
 	START_MENU,
