@@ -24,11 +24,9 @@ class CInputManager
 public:
 
 	//Initializes the keys to be in the released state.
-	CInputManager()
-	{
-		for (int i = 0; i < 255; ++i) KeyArray[i] = RELEASED;
-		for (int i = 0; i < 3; ++i) MouseArray[i] = RELEASED;
-	}
+	CInputManager();
+	static void ProcessKeyInput();
+	static void ProcessKeyInput(float _DeltaTime);
 
 	glm::vec2 GetMousePos() { return MousePos; }
 
@@ -60,25 +58,23 @@ public:
 		else return false;
 	}
 
-private:
+	//Contains an array of all Special characters on a keyboard
+	static unsigned char KeySpecialArray[255];
+
 	//Contains an array of all normal characters on a keyboard
 	static unsigned char KeyArray[255];
 
 	//Contains an array of the 3 mouse buttons
 	static unsigned int MouseArray[3];
+private:
 
 	//Keeps current mouse position
 	static glm::vec2 MousePos;
 
-	static void NormKeyDown(unsigned char key, int x, int y)
-	{
-		KeyArray[key] = FIRST_PRESSED;
-	};
-
-	static void NormKeyUp(unsigned char key, int x, int y) 
-	{
-		KeyArray[key] = RELEASED;
-	};
+	static void NormKeyDown(unsigned char key, int x, int y);
+	static void NormKeyUp(unsigned char key, int x, int y);
+	static void SpecialKeyDown(int key, int x, int y);
+	static void SpecialKeyUp(int key, int x, int y);
 
 	static void MouseButton(int button, int state, int x, int y) 
 	{	
@@ -92,5 +88,6 @@ private:
 			else if (state == GLUT_UP) MouseArray[button] = RELEASED;
 		}
 	}
+	
 };
 

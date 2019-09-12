@@ -12,9 +12,9 @@ std::map<std::string, GLuint> programMap;
 
 GLuint ShaderLoader::CreateProgram(const char* vertexShaderFilename, const char* fragmentShaderFilename)
 {
-	std::string programFilename = vertexShaderFilename + *fragmentShaderFilename;
-	std::map<std::string, GLuint>::iterator it = shaderMap.find(vertexShaderFilename);
-	if (it != shaderMap.end())
+	std::string programFilename = static_cast<std::string>(vertexShaderFilename) + static_cast<std::string>(fragmentShaderFilename);
+	std::map<std::string, GLuint>::iterator it = programMap.find(programFilename);
+	if (it != programMap.end())
 	{
 		return (*it).second; // pair.second
 		// same as:
@@ -34,11 +34,11 @@ GLuint ShaderLoader::CreateProgram(const char* vertexShaderFilename, const char*
 		glGetProgramiv(program, GL_LINK_STATUS, &link_result);
 		if (link_result == GL_FALSE)
 		{
-			std::string programName = vertexShaderFilename + *fragmentShaderFilename;
+			std::string programName = static_cast<std::string>(vertexShaderFilename) + static_cast<std::string>(fragmentShaderFilename);
 			PrintErrorDetails(false, program, programName.c_str());
 			return 0;
 		}
-		programMap.insert({ vertexShaderFilename, program });
+		programMap.insert({ programFilename, program });
 		return program;
 	}
 }

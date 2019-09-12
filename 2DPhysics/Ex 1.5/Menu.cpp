@@ -36,13 +36,13 @@ void CMenu::DecrementMenu()
 }
 
 void CMenu::Process(int& _Option) {
-	if (CInputManager::KeySpecialArray[GLUT_KEY_UP] == KEY_FIRST_PRESS) {
+	if (CInputManager::KeySpecialArray[GLUT_KEY_UP] == FIRST_PRESSED) {
 		DecrementMenu();
 	}
-	else if (CInputManager::KeySpecialArray[GLUT_KEY_DOWN] == KEY_FIRST_PRESS) {
+	else if (CInputManager::KeySpecialArray[GLUT_KEY_DOWN] == FIRST_PRESSED) {
 		IncrementMenu();
 	}
-	else if (CInputManager::KeyArray['\r'] == KEY_FIRST_PRESS) {
+	else if (CInputManager::KeyArray['\r'] == FIRST_PRESSED) {
 		_Option = CurrentOption;
 		CurrentOption = 0;
 		SelectOption(CurrentOption);

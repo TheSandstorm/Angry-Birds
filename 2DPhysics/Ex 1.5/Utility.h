@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <glm.hpp>
+#include <Box2D-master/Box2D/Box2D.h>
 
 namespace Utility
 {
@@ -10,28 +11,14 @@ namespace Utility
 	const std::string SingleColorShaderFrag = "Resources/Shaders/SingleColorShader.fs";
 	const std::string FogShaderVert = "Resources/Shaders/FogObjectShader.vs";
 	const std::string FogShaderFrag = "Resources/Shaders/FogObjectShader.fs";
-	const std::string ModelFogShaderVert = "Resources/Shaders/FogModel.vs";
-	const std::string ModelFogShaderFrag = "Resources/Shaders/FogModel.fs";
 	const std::string ObjectShaderVert = "Resources/Shaders/ObjectShaderV.vs";
 	const std::string ObjectShaderFrag = "Resources/Shaders/ObjectShaderF.fs";
-	const std::string ModelShaderVert = "Resources/Shaders/Model.vs";
-	const std::string ModelShaderFrag = "Resources/Shaders/Model.fs";
 	const std::string CubeMapShaderFrag = "Resources/Shaders/CubeShader.fs";
 	const std::string CubeMapShaderVert = "Resources/Shaders/CubeShader.vs";
 	const std::string FogCubeMapShaderVert = "Resources/Shaders/FogCubeShader.vs";
 	const std::string FogCubeMapShaderFrag = "Resources/Shaders/FogCubeShader.fs";
-	const std::string TessShaderVert = "Resources/Shaders/TessShader.vs";
-	const std::string TessShaderTCSQuad = "Resources/Shaders/TessShaderQuad.tcs";
-	const std::string TessShaderTESQuad = "Resources/Shaders/TessShaderQuad.tes";
-	const std::string TessShaderTCSTri = "Resources/Shaders/TessShaderTri.tcs";
-	const std::string TessShaderTESTri = "Resources/Shaders/TessShaderTri.tes";
-	const std::string TessShaderFrag = "Resources/Shaders/TessShader.fs";
-	const std::string GeometryShaderVert = "Resources/Shaders/GeometryShader.vs";
-	const std::string GeometryShaderGeom = "Resources/Shaders/GeometryShader.gs";
 	const std::string TextShaderVert = "Resources/Shaders/Text.vs";
 	const std::string TextShaderFrag = "Resources/Shaders/Text.fs";
-
-	const std::string PlayerModel = "Resources/Models/Tank/Tank.obj";
 };
 
 namespace TexturePaths

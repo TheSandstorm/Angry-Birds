@@ -3,7 +3,6 @@
 #include <iostream>
 #include <glew.h>
 #include <freeglut.h>
-
 using namespace std;
 
 
@@ -28,6 +27,7 @@ void Exit()
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
+
 	glutSetOption(GLUT_MULTISAMPLE, 8);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
 	glutInitWindowPosition(50, 50);

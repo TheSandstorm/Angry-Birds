@@ -15,27 +15,47 @@ CProgramManager::CProgramManager()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glLineWidth(3.0f);
 	//Creating the shaders
-	shaderProgram = SL->CreateProgram(
-		const_cast<char*>("Resources/Shaders/Vertex Shader.vs"),
-		const_cast<char*>("Resources/Shaders/Fragment Shader.fs")
-	);
 	glClearColor(1.0f, 0.6f, 0.0f, 1.0f); //Orange
 
 #pragma region StartMenu
 	std::vector<std::string> StartOpt;
 	StartOpt.push_back("Start");
 	StartOpt.push_back("Options");
-	StartOpt.push_back("Restart");
 	StartOpt.push_back("Quit");
 
 	StartMenu = std::make_shared<CMenu>(StartOpt, glm::vec2(-90.0f, -200.0f));
+#pragma endregion
+
+#pragma region LevelSelect
+	std::vector<std::string> LevelOpt;
+	LevelOpt.push_back("Level 1");
+	LevelOpt.push_back("Level 2");
+	LevelOpt.push_back("Back");
+
+	LevelSelect = std::make_shared<CMenu>(LevelOpt, glm::vec2(-90.0f, -200.0f));
+#pragma endregion
+
+#pragma region OptionsMenu
+	std::vector<std::string> OptionsOpt;
+	OptionsOpt.push_back("");// Insert changeable text here
+	OptionsOpt.push_back("Back");
+
+	OptionMenu = std::make_shared<CMenu>(OptionsOpt, glm::vec2(-90.0f, -200.0f));
+#pragma endregion
+
+#pragma region EndGameMenu
+	std::vector<std::string> EndOpt;
+	EndOpt.push_back("Restart Level");
+	EndOpt.push_back("Level Select");
+	EndOpt.push_back("Back");
+
+	EndScreen = std::make_shared<CMenu>(EndOpt, glm::vec2(-90.0f, -200.0f));
+
 #pragma endregion
 }
 CProgramManager::~CProgramManager()
 {
 	delete IM; IM = nullptr;
-	delete SL; SL = nullptr;
-	shaderProgram = 0;
 }
 
 void CProgramManager::DestoryInstance()
@@ -65,7 +85,7 @@ void CProgramManager::Update()
 		{
 		case 0:
 			CurrentState = LEVEL_SELECT;
-				break;
+			break;
 		case 1:
 			CurrentState = OPTION_MENU;
 			break;
@@ -117,16 +137,25 @@ void CProgramManager::Update()
 	}
 	case LEVEL_1:
 	{
-		//Level init and then process would go here
+		if (!IsGameStart)
+		{
+			//Init
+		}
+		//Process would go here
+
 	}
 	case LEVEL_2:
 	{
+		if (!IsGameStart)
+		{
+			//Init
+		}
 		//Level init and then process would go here
 	}
 	case END_MENU:
 	{
 		int TempOutput = NULL;
-		EndMenu->Process(TempOutput);
+		EndScreen->Process(TempOutput);
 		CInputManager::ProcessKeyInput();
 		switch (TempOutput)
 		{
@@ -148,9 +177,51 @@ void CProgramManager::Update()
 void CProgramManager::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	switch (CurrentState)
+	{
+	case START_MENU:
+		DrawMenu();
+		break;
+	case LEVEL_SELECT:
+		DrawLevelSelect();
+		break;
+	case LEVEL_1:
+	case LEVEL_2:
+		DrawLevel();
+		//Switches states
+		break;
+	case OPTION_MENU:
+		DrawOption();
+		break;
+	case END_MENU:
+		DrawEndScreen();
+		break;
+
+	default:break;
+	}
 }
 
-glm::vec3 CProgramManager::CrossProduct(glm::vec3 A, glm::vec3 B)
+void CProgramManager::DrawMenu()
 {
-	return glm::vec3((A.y*B.z - A.z * B.y), (A.z*B.x - A.x * B.z), (A.x*B.y - A.y * B.x));
+	//Title->Render();
+	StartMenu->Render();
+}
+
+void CProgramManager::DrawLevelSelect()
+{
+	LevelSelect->Render();
+}
+
+void CProgramManager::DrawOption()
+{
+	OptionMenu->Render();
+}
+
+void CProgramManager::DrawLevel()
+{
+}
+
+void CProgramManager::DrawEndScreen()
+{
+	EndScreen->Render();
 }

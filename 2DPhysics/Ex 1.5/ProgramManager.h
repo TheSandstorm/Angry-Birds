@@ -9,15 +9,6 @@
 #include "MeshManager.h"
 #include "InputManger.h"
 
-enum SceneState {
-	START_MENU,
-	OPTION_MENU,
-	LEVEL_SELECT,
-	LEVEL_1,
-	LEVEL_2,
-	END_MENU
-};
-
 class CProgramManager
 {
 public:
@@ -34,18 +25,24 @@ public:
 private:
 	CProgramManager();
 	static std::shared_ptr<CProgramManager> SceneManagerPtr;
-	GLuint shaderProgram;
 	CInputManager* IM = new CInputManager;
-	ShaderLoader* SL = new ShaderLoader;
 
 	std::vector<std::string> StartOpt;
 	std::vector<std::string> OptOpt;
 
+	std::shared_ptr<CTextLabel> Title;
 	std::shared_ptr<CMenu> StartMenu;
 	std::shared_ptr<CMenu> OptionMenu;
+	std::shared_ptr<CMenu> LevelSelect;
+	std::shared_ptr<CMenu> EndScreen;
 
 	static SceneState CurrentState;
 
+	void DrawMenu();
+	void DrawLevelSelect();
+	void DrawOption();
+	void DrawLevel();
+	void DrawEndScreen();
 
-	glm::vec3 CrossProduct(glm::vec3 A, glm::vec3 B);
+	bool IsGameStart;
 };

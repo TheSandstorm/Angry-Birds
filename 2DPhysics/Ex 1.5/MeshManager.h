@@ -10,26 +10,18 @@
 enum Object_Attributes
 {
 	//Object Types
-	CUBE_OBJECT,
-	SPHERE_OBJECT,
 	PLANE_OBJECT,
-	QUAD_TESS_OBJECT,
-	MODEL_PLAYER
+	CIRCLE_OBJECT
 	
 };
 enum Shader_Attributes
 {
 	//Shader types
 	STANDARD_SHADER,
-	STANDARD_MODEL_SHADER,
 	STANDARD_CUBEMAP_SHADER,
 	FOG_SHADER,
-	FOG_MODEL_SHADER,
 	FOG_CUBEMAP_SHADER,
-	STENCIL_SHADER,
-	GEOMETRY_SHADER,
-	TESS_QUAD_SHADER,
-	TESS_TRI_SHADER
+	STENCIL_SHADER
 };
 
 struct MESH
@@ -59,19 +51,10 @@ private:
 	static GLuint CubeMapShader;
 	static GLuint FogCubeMapShader;
 	static GLuint ObjectShader;
-	static GLuint ModelShader;
-	static GLuint TextShader;
 	static GLuint FogObjectShader;
-	static GLuint FogModelShader;
 	static GLuint StencilShader;
-	static GLuint GeometryShader;
-	static GLuint QuadTessShader;
-	static GLuint TriTessShader;
 
 	//Mesh ptrs
-	static std::shared_ptr<MESH> CubeMesh;
-	static std::shared_ptr<MESH> SphereMesh;
 	static std::shared_ptr<MESH> PlaneMesh;
-	static std::shared_ptr<MESH> QuadTessMesh;
 
 };
