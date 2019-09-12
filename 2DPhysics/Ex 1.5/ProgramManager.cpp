@@ -106,9 +106,11 @@ void CProgramManager::Update()
 		{
 		case 0:
 			CurrentState = LEVEL_1;
+			//Init Game Level 1
 			break;
 		case 1:
 			CurrentState = LEVEL_2;
+			//Init Game Level 2
 			break;
 		case 2:
 			CurrentState = START_MENU;
@@ -137,12 +139,7 @@ void CProgramManager::Update()
 	}
 	case LEVEL_1:
 	{
-		if (!IsGameStart)
-		{
-			//Init
-		}
 		//Process would go here
-
 	}
 	case LEVEL_2:
 	{

@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <glm.hpp>
-#include <Box2D-master/Box2D/Box2D.h>
+#include <Box2D/Box2D.h>
 
 namespace Utility
 {
@@ -45,11 +45,11 @@ namespace ScreenInfo
 
 struct Transform
 {
-	glm::vec3 Position;
-	glm::vec3 Rotation;
-	glm::vec3 Scale;
+	b2Vec2 Position;
+	float Rotation;
+	b2Vec2 Scale;
 
-	inline Transform(glm::vec3 _Position, glm::vec3 _Rotation, glm::vec3 _Scale)
+	Transform(b2Vec2 _Position, float _Rotation, b2Vec2 _Scale)
 	{
 		Position = _Position;
 		Rotation = _Rotation;

@@ -131,9 +131,11 @@
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MeshManager.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ProgramManager.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="TextManager.cpp" />
@@ -143,9 +145,11 @@
     <ClInclude Include="Clock.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManger.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MeshManager.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="PigObject.h" />
     <ClInclude Include="ProgramManager.h" />
     <ClInclude Include="ShaderLoader.h" />
