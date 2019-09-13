@@ -128,9 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BirdObject.cpp" />
+    <ClCompile Include="BoxObject.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GlassObject.cpp" />
+    <ClCompile Include="GroundObject.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
@@ -143,9 +147,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BirdObject.h" />
+    <ClInclude Include="BoxObject.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GlassObject.h" />
+    <ClInclude Include="GroundObject.h" />
     <ClInclude Include="InputManger.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Line.h" />

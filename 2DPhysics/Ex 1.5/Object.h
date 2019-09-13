@@ -15,7 +15,8 @@ struct ObjectData {
 class Object
 {
 public:
-	Object(Transform _transform, b2BodyType _type);
+	Object();
+	Object(Transform _transform, b2BodyType _type, GLuint _ShaderProgram, GLuint _Texture);
 	~Object();
 
 	b2Body* GetBody() { return BoxBody; };
@@ -28,7 +29,10 @@ public:
 
 protected:
 	MESH MeshObject;
+	//Temp
+	GLuint VAO, VBO, EBO;
 
+	GLuint ShaderProgram, Texture;
 	Transform TransformSelf;
 
 	b2Body* BoxBody;

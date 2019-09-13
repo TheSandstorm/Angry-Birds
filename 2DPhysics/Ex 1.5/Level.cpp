@@ -4,7 +4,7 @@ b2World* Level::World;
 
 Level::Level()
 {
-	World = new b2World(Utility::Gravity);
+	World = std::make_unique<b2World>(Utility::Gravity);
 	ContactListener = new Listener;
 	World->SetContactListener(&*ContactListener);
 	MeshManager::GetInstance();
