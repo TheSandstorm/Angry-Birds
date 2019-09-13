@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility.h"
-class Bird
+#include "Object.h"
+class Bird : Object
 {
 public:
 

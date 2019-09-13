@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="BirdObject.cpp" />
     <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="BirdObject.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManger.h" />
     <ClInclude Include="Level.h" />

@@ -3,6 +3,15 @@
 #include "MeshManager.h"
 #include <string>
 
+struct ObjectData {
+	std::string ObjectType;
+	bool IsMarkedForDestruction = false;
+
+	void MarkForDestruction() {
+		IsMarkedForDestruction = true;
+	}
+};
+
 class Object
 {
 public:
@@ -15,7 +24,7 @@ public:
 	virtual void Process() = 0;
 	virtual void Render() = 0;
 
-	ObjectData Data;
+	ObjectData* Data;
 
 protected:
 	MESH MeshObject;
@@ -27,11 +36,3 @@ protected:
 
 };
 
-struct ObjectData {
-	std::string ObjectType;
-	bool IsMarkedForDestruction = false;
-
-	void MarkForDestruction() {
-		IsMarkedForDestruction = true;
-	}
-};

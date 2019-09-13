@@ -8,6 +8,7 @@ namespace Utility
 {
 	const unsigned int SCR_WIDTH = 1600;
 	const unsigned int SCR_HEIGHT = 800;
+	const b2Vec2 Gravity(0.0f, -9.8f);
 	const std::string SingleColorShaderFrag = "Resources/Shaders/SingleColorShader.fs";
 	const std::string FogShaderVert = "Resources/Shaders/FogObjectShader.vs";
 	const std::string FogShaderFrag = "Resources/Shaders/FogObjectShader.fs";
@@ -49,7 +50,12 @@ struct Transform
 	float Rotation;
 	b2Vec2 Scale;
 
-	Transform(b2Vec2 _Position, float _Rotation, b2Vec2 _Scale)
+	Transform()
+	{
+
+	}
+
+	inline Transform(b2Vec2 _Position, float _Rotation, b2Vec2 _Scale)
 	{
 		Position = _Position;
 		Rotation = _Rotation;

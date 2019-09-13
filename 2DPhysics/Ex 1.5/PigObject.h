@@ -1,6 +1,7 @@
 #pragma once
 #include "Utility.h"
-class Pig
+#include "Object.h"
+class Pig : Object
 {
 public:
 

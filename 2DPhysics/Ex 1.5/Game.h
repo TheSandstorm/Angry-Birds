@@ -2,16 +2,18 @@
 #include "InputManger.h"
 #include "Utility.h"
 #include "Level.h"
+#include "Clock.h"
 class Game
 {
 public:
 	void Process();
-	Game();
+	Game(int _CurrentLevel);
 	~Game();
 	void Init(int _Level);
 	void Render();
 
 private:
 	unsigned int CurrentLevel;
-	Level Level;
+	float DeltaTime;
+	Level* mLevel;
 };
