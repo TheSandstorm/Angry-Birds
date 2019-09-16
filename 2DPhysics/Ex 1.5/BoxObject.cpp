@@ -13,6 +13,7 @@ Box::Box(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram, GLuint _
 	TransformSelf = _Transform;
 	bType = _Type;
 	ShaderProgram = _ShaderProgram;
+	Texture = _Texture;
 }
 
 void Box::Init(b2World* _World)
@@ -132,7 +133,7 @@ void Box::Render()
 
 	//Creating the MVP using the translation matrices and orthographic projection
 	glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
-	glm::mat4 proj = glm::ortho(0.0f, Utility::SCR_WIDTH, 0.0f, Utility::SCR_HEIGHT); // Camera needs to replace this
+	glm::mat4 proj = glm::ortho(0.0f, float(Utility::SCR_WIDTH), 0.0f, float(Utility::SCR_HEIGHT)); // Camera needs to replace this
 	glm::mat4 MVP = proj * ModelMatrix;
 
 	//Setting a memory pointer in the shader program to the MVP

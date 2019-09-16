@@ -57,8 +57,8 @@ CProgramManager::~CProgramManager()
 {
 	delete IM; 
 	IM = nullptr;
-	delete Game;
-	Game = nullptr;
+	delete newGame;
+	newGame = nullptr;
 }
 
 void CProgramManager::DestoryInstance()
@@ -97,6 +97,7 @@ void CProgramManager::Update()
 		default:
 			break;
 		}
+		break;
 
 	}
 	case LEVEL_SELECT:
@@ -109,11 +110,13 @@ void CProgramManager::Update()
 		{
 		case 0:
 			CurrentState = LEVEL_1;
-			Game->Init(1);
+			newGame = new Game(1);
+			newGame->Init();
 			//Init Game Level 1
 			break;
 		case 1:
-			Game->Init(2);
+			newGame = new Game(2);
+			newGame->Init();
 			CurrentState = LEVEL_2;
 			//Init Game Level 2
 			break;
@@ -123,6 +126,7 @@ void CProgramManager::Update()
 		default:
 			break;
 		}
+		break;
 	}
 	case OPTION_MENU:
 	{
@@ -141,11 +145,13 @@ void CProgramManager::Update()
 		default:
 			break;
 		}
+		break;
 	}
 	case LEVEL_1:
 	case LEVEL_2:
 	{
-		Game->Process();
+		newGame->Process();
+		break;
 		//Process would go here
 	}
 	case END_MENU:
@@ -164,6 +170,7 @@ void CProgramManager::Update()
 		default:
 			break;
 		}
+		break;
 	}
 	default:
 		break;
@@ -215,7 +222,7 @@ void CProgramManager::DrawOption()
 
 void CProgramManager::DrawLevel()
 {
-	Game->Render();
+	newGame->Render();
 }
 
 void CProgramManager::DrawEndScreen()

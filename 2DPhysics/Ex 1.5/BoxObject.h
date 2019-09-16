@@ -7,7 +7,7 @@ class Box: public Object
 public:
 	Box();
 	~Box();
-	Box(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram);
+	Box(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram, GLuint _Texture);
 
 	void Init(b2World * _World);
 	void Process();

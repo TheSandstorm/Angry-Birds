@@ -4,6 +4,7 @@ Game::Game(int _CurrentLevel)
 { 
 	CurrentLevel = _CurrentLevel;
 	CClock::GetInstance(); 
+	mLevel = new Level;
 }
 
 Game::~Game() 
@@ -19,16 +20,16 @@ void Game::Process()
 	//Could Add a pause menu around here
 	if (CInputManager::KeyArray['r'] == FIRST_PRESSED)
 	{
-		this->Init(CurrentLevel);
+		this->Init();
 		//Restart the level
 	}
 	mLevel->Process(DeltaTime);
 
 }
 
-void Game::Init(int _Level)
-{
-	mLevel->Init(_Level);
+void Game::Init()
+{	
+	mLevel->Init(CurrentLevel);
 }
 
 void Game::Render()

@@ -9,7 +9,7 @@ public:
 	void Process();
 	Game(int _CurrentLevel);
 	~Game();
-	void Init(int _Level);
+	void Init();
 	void Render();
 
 private:
