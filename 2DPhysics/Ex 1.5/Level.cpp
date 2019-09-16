@@ -1,7 +1,5 @@
 #include "Level.h"
 
-b2World* Level::World;
-
 Level::Level()
 {
 	World = std::make_unique<b2World>(Utility::Gravity);
@@ -13,8 +11,7 @@ Level::Level()
 Level::~Level()
 {
 	MeshManager::DestroyInstance();
-	delete World;
-	World = nullptr;
+	World.reset();
 	delete ContactListener;
 	ContactListener = nullptr;
 }
