@@ -27,7 +27,7 @@ private:
 	CProgramManager();
 	static std::shared_ptr<CProgramManager> SceneManagerPtr;
 	CInputManager* IM = new CInputManager;
-	Game* Game;
+	Game* newGame;
 
 	std::vector<std::string> StartOpt;
 	std::vector<std::string> OptOpt;

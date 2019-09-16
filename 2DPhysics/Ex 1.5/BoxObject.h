@@ -1,7 +1,5 @@
 #pragma once
 #include "Object.h"
-//#include <Box2D/Box2D.h>
-#include "Dependencies/Box2D/Box2D.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 class Box: public Object

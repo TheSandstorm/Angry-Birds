@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(ProjectDir)\Dependencies\glew;$(ProjectDir)\Dependencies\freeglut;$(ProjectDir)\Dependencies\glm;$(ProjectDir)\Dependencies\soil;$(ProjectDir)\Dependencies;$(ProjectDir)\Dependencies\fmod;$(ProjectDir)\Dependencies\freetype;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\Dependencies\glew;$(ProjectDir)\Dependencies\freeglut;$(ProjectDir)\Dependencies\glm;$(ProjectDir)\Dependencies\soil;$(ProjectDir)\Dependencies;$(ProjectDir)\Dependencies\fmod;$(ProjectDir)\Dependencies\freetype;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)\Dependencies\glew;$(ProjectDir)\Dependencies\freeglut;$(ProjectDir)\Dependencies\glm;$(ProjectDir)\Dependencies\soil;$(ProjectDir)\Dependencies;$(ProjectDir)\Dependencies\fmod;$(ProjectDir)\Dependencies\freetype;$(ProjectDir)\Dependencies\Box2D;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir)\Dependencies\glew;$(ProjectDir)\Dependencies\freeglut;$(ProjectDir)\Dependencies\glm;$(ProjectDir)\Dependencies\soil;$(ProjectDir)\Dependencies;$(ProjectDir)\Dependencies\fmod;$(ProjectDir)\Dependencies\freetype;$(IncludePath)</IncludePath>
@@ -86,7 +86,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;freeglut.lib;SOIL.lib;fmod_vc.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;freeglut.lib;SOIL.lib;fmod_vc.lib;freetype.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -13,6 +13,7 @@ Box::Box(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram, GLuint _
 	TransformSelf = _Transform;
 	bType = _Type;
 	ShaderProgram = _ShaderProgram;
+	Texture = _Texture;
 }
 
 void Box::Init(b2World* _World)
