@@ -6,6 +6,7 @@ Level::Level()
 	ContactListener = new Listener;
 	World->SetContactListener(&*ContactListener);
 	MeshManager::GetInstance();
+
 }
 
 Level::~Level()
@@ -19,13 +20,13 @@ Level::~Level()
 void Level::Init(int Level)
 {
 	birb->initBird(World.get());
-
+	//birb->RenderBird();
 	//Creates Level based on what level number it is.
 }
 
 void Level::Render()
 {
-
+	birb->RenderBird();
 }
 
 void Level::Process(float DeltaTime)

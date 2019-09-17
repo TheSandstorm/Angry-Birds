@@ -31,6 +31,7 @@ protected:
 	MESH MeshObject;
 	//Temp
 	GLuint VAO, VBO, EBO;
+	GLuint VAO1, VBO1, EBO1;
 
 	GLuint ShaderProgram, Texture;
 	Transform TransformSelf;
