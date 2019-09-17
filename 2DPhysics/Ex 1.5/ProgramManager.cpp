@@ -110,8 +110,10 @@ void CProgramManager::Update()
 		{
 		case 0:
 			CurrentState = LEVEL_1;
+
 			newGame = new Game(1);
 			newGame->Init();
+
 			//Init Game Level 1
 			break;
 		case 1:

@@ -6,6 +6,7 @@
 #include "Utility.h"
 #include "Menu.h"
 #include "Game.h"
+#include "BirdObject.h"
 //Camera class needed
 #include "MeshManager.h"
 #include "InputManger.h"
@@ -28,6 +29,7 @@ private:
 	static std::shared_ptr<CProgramManager> SceneManagerPtr;
 	CInputManager* IM = new CInputManager;
 	Game* newGame;
+	Bird* bird;
 
 	std::vector<std::string> StartOpt;
 	std::vector<std::string> OptOpt;

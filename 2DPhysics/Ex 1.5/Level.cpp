@@ -18,6 +18,8 @@ Level::~Level()
 
 void Level::Init(int Level)
 {
+	birb->initBird(World.get());
+
 	//Creates Level based on what level number it is.
 }
 
@@ -33,3 +35,26 @@ void Level::Process(float DeltaTime)
 	//After all process are done clear forces
 	World->ClearForces();
 }
+
+b2World * Level::getWorld()
+{
+	std::cout << "got to get world";
+
+	if (World.get() != nullptr) {
+		return World.get();
+	}
+	else{
+		return 0;
+	}
+}
+
+//*//std::unique_ptr<b2World> Level::getWorld()
+//{
+//
+//	if (World.get() != nullptr) {
+//		return World.get();
+//	}
+//	else{
+//		return 0;
+//	}
+//}
