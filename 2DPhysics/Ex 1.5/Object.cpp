@@ -15,4 +15,7 @@ Object::Object(Transform _transform, b2BodyType _type, GLuint _ShaderProgram, GL
 Object::~Object()
 {
 	BoxBody->GetWorld()->DestroyBody(BoxBody);
+	BoxBody = nullptr;
+	delete Data;
+	Data = nullptr;
 }

@@ -10,6 +10,7 @@ Level::Level()
 
 Level::~Level()
 {
+	ObjectVect.clear();
 	MeshManager::DestroyInstance();
 	World.reset();
 	delete ContactListener;
@@ -27,7 +28,7 @@ void Level::Init(int Level)
 	}
 	case LEVELSTATE_1:
 	{
-		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400,400), 0.0f, b2Vec2(100.0f,100.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400,400), 0.0f, b2Vec2(10.0f,10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		break;
 	}
 	case LEVELSTATE_2:
