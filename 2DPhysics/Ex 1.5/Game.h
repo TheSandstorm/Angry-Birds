@@ -3,10 +3,11 @@
 #include "Utility.h"
 #include "Level.h"
 #include "Clock.h"
+#include "InputManger.h"
 class Game
 {
 public:
-	void Process();
+	void Process(CInputManager* _IM);
 	Game(int _CurrentLevel);
 	~Game();
 	void Init();

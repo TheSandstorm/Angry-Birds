@@ -49,6 +49,17 @@ void CInputManager::ProcessKeyInput() {
 	}
 }
 
+void CInputManager::ProcessMouse()
+{
+	glutMouseFunc(MouseButton);
+	glutMotionFunc(MouseMovement);
+	glutPassiveMotionFunc(MouseMovement);
+	if (MouseArray[MOUSE_LEFT] == FIRST_PRESSED)
+	{
+		MouseArray[MOUSE_LEFT] = HELD;	
+	}
+}
+
 void CInputManager::NormKeyDown(unsigned char key, int x, int y) {
 	KeyArray[key] = FIRST_PRESSED;
 }
@@ -63,4 +74,22 @@ void CInputManager::SpecialKeyDown(int key, int x, int y) {
 
 void CInputManager::SpecialKeyUp(int key, int x, int y) {
 	KeySpecialArray[key] = RELEASED;
+}
+
+void CInputManager::MouseButton(int button, int state, int x, int y)
+{
+	if (button < 3) {
+		if (state == GLUT_DOWN)
+		{
+			std::cout << x << "\n" << y << std::endl;
+			MouseArray[button] = FIRST_PRESSED;
+			MousePos = glm::vec2(x, y);
+		}
+		else if (state == GLUT_UP) MouseArray[button] = RELEASED;
+	}
+}
+
+void CInputManager::MouseMovement(int x, int y)
+{
+	MousePos = glm::vec2(x, y);
 }

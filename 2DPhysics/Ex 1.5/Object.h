@@ -4,9 +4,9 @@
 #include <string>
 
 struct ObjectData {
+
 	std::string ObjectType;
 	bool IsMarkedForDestruction = false;
-
 	void MarkForDestruction() {
 		IsMarkedForDestruction = true;
 	}
@@ -21,13 +21,14 @@ public:
 
 	b2Body* GetBody() { return BoxBody; };
 	
-	virtual void Init() = 0;
+	virtual void Init(b2World * _World) = 0;
 	virtual void Process() = 0;
 	virtual void Render() = 0;
 
 	ObjectData* Data;
 
 protected:
+	int IndicesCount;
 	MESH MeshObject;
 	//Temp
 	GLuint VAO, VBO, EBO;

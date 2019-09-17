@@ -14,7 +14,7 @@ Game::~Game()
 	mLevel = nullptr;
 }
 
-void Game::Process()
+void Game::Process(CInputManager* _IM)
 {
 	DeltaTime = CClock::GetDeltaTime();
 	//Could Add a pause menu around here
@@ -23,7 +23,7 @@ void Game::Process()
 		this->Init();
 		//Restart the level
 	}
-	mLevel->Process(DeltaTime);
+	mLevel->Process(DeltaTime, _IM);
 
 }
 

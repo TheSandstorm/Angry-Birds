@@ -6,6 +6,7 @@ class Ground : public Object
 {
 public:
 	Ground();
+	Ground(Transform _Transform, b2BodyType _bodytype);
 	~Ground();
 
 	void Init();
