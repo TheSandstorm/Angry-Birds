@@ -47,16 +47,8 @@ public:
 		else return 'm';
 	}
 
-	bool ProcessMouse()
-	{
-		glutMouseFunc(MouseButton);
-		if (MouseArray[MOUSE_LEFT] == FIRST_PRESSED)
-		{
-			MouseArray[MOUSE_LEFT] = HELD;
-			return true;
-		}
-		else return false;
-	}
+	void ProcessMouse();
+
 
 	//Contains an array of all Special characters on a keyboard
 	static unsigned char KeySpecialArray[255];
@@ -70,24 +62,14 @@ private:
 
 	//Keeps current mouse position
 	static glm::vec2 MousePos;
+	
 
 	static void NormKeyDown(unsigned char key, int x, int y);
 	static void NormKeyUp(unsigned char key, int x, int y);
 	static void SpecialKeyDown(int key, int x, int y);
 	static void SpecialKeyUp(int key, int x, int y);
 
-	static void MouseButton(int button, int state, int x, int y) 
-	{	
-		if (button < 3) {
-			if (state == GLUT_DOWN)
-			{
-				std::cout << x << "\n" << y << std::endl;
-				MouseArray[button] = FIRST_PRESSED;
-				MousePos = glm::vec2(x, y);				
-			}
-			else if (state == GLUT_UP) MouseArray[button] = RELEASED;
-		}
-	}
-	
+	static void MouseButton(int button, int state, int x, int y);
+	static void MouseMovement(int x, int y);
 };
 

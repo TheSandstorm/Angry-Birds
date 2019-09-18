@@ -1,9 +1,18 @@
 #pragma once
 #include "Utility.h"
+#include "InputManger.h"
 #include "MeshManager.h"
+#include "BoxObject.h"
 #include "Object.h"
 #include "BirdObject.h"
 #include "ContactListener.h"
+
+enum LevelState
+{
+	LEVEL_INCORRECT,
+	LEVELSTATE_1,
+	LEVELSTATE_2
+};
 
 class Level
 {
@@ -13,12 +22,8 @@ public:
 
 	void Init(int Level);
 	void Render();
-	void Process(float DeltaTime);
-
-
-	b2World* getWorld();
-	//std::unique_ptr<b2World> getWorld();
-
+	void Process(float DeltaTime, CInputManager* _IM);
+	
 private:
 
 

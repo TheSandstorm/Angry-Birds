@@ -74,10 +74,8 @@ std::shared_ptr<CProgramManager> CProgramManager::GetInstance()
 
 void CProgramManager::Update()
 {
-	char Result = IM->ProcessKeys();
 	switch (CurrentState)
 	{
-
 	case START_MENU:
 	{
 		int TempOutput = NULL;
@@ -152,7 +150,9 @@ void CProgramManager::Update()
 	case LEVEL_1:
 	case LEVEL_2:
 	{
-		newGame->Process();
+		IM->ProcessMouse();
+		IM->ProcessKeyInput();
+		newGame->Process(IM);
 		break;
 		//Process would go here
 	}
