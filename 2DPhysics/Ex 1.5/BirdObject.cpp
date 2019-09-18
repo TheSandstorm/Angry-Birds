@@ -29,7 +29,7 @@ void Bird::RenderBird()
 	//Creating the transformation matrices
 	glm::mat4 TranslationMatrix = glm::translate(glm::mat4(), glm::vec3(bodyDef.position.x, bodyDef.position.y, 0.0f));
 	glm::mat4 RotationMatrix = glm::rotate(glm::mat4(),bodyDef.angle , glm::vec3(0.0f, 0.0f, 1.0f));
-	glm::mat4 ScaleMatrix = glm::scale(glm::mat4(), glm::vec3(100.0f, 100.0f, 100.0f));
+	glm::mat4 ScaleMatrix = glm::scale(glm::mat4(), glm::vec3(50, 1, 5));
 
 	//Creating the MVP using the translation matrices and orthographic projection
 	glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
@@ -58,16 +58,20 @@ void Bird::initBird(b2World* _World)
 
 	//setting the bird to be a dynamic rigidbody
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0, 20);
+	bodyDef.position.Set(500, 500);
 	bodyDef.angle = 0;
+	bodyDef.active = true;
 
 	b2Body* dynamicBody = _World ->CreateBody(&bodyDef);
 
-	birdShape.SetAsBox(1, 1);
+	birdShape.SetAsBox(5, 5);
 
 	b2FixtureDef birdFixtureDef;
 	birdFixtureDef.shape = &birdShape;
-	birdFixtureDef.density = 1;
+	birdFixtureDef.density = 1.0f;
+	birdFixtureDef.friction = 1.0f;
+	birdFixtureDef.restitution = 0.0f;
+
 	dynamicBody->CreateFixture(&birdFixtureDef);
 
 	//DEBUG

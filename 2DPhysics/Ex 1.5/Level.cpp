@@ -30,7 +30,9 @@ void Level::Init(int Level)
 	case LEVELSTATE_1:
 	{
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400,400), 0.0f, b2Vec2(10.0f,10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		birb->initBird(World.get());
 		break;
+	
 	}
 	case LEVELSTATE_2:
 	{
@@ -53,6 +55,7 @@ void Level::Render()
 	{
 		ObjectVect[i]->Render();
 	}
+	birb->RenderBird();
 }
 
 void Level::Process(float DeltaTime, CInputManager* _IM)
@@ -68,18 +71,6 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	}
 	//After all process are done clear forces
 	World->ClearForces();
-}
-
-b2World * Level::getWorld()
-{
-	std::cout << "got to get world";
-
-	if (World.get() != nullptr) {
-		return World.get();
-	}
-	else{
-		return 0;
-	}
 }
 
 //*//std::unique_ptr<b2World> Level::getWorld()
