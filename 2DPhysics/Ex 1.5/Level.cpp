@@ -31,6 +31,7 @@ void Level::Init(int Level)
 	{
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400,400), 0.0f, b2Vec2(10.0f,10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		birb->initBird(World.get());
+
 		break;
 	
 	}
@@ -65,6 +66,7 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 
 	//Does a step of the world. Might need to become a fixed update loop instead of where it is now
 	World->Step(DeltaTime, 2, 2);
+	birb->processBirb();
 	for (unsigned int i = 0; i < ObjectVect.size(); i++)
 	{
 		ObjectVect[i]->Process();
@@ -72,14 +74,3 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	//After all process are done clear forces
 	World->ClearForces();
 }
-
-//*//std::unique_ptr<b2World> Level::getWorld()
-//{
-//
-//	if (World.get() != nullptr) {
-//		return World.get();
-//	}
-//	else{
-//		return 0;
-//	}
-//}

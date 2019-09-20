@@ -5,15 +5,12 @@ GLuint birdProgram;
 
 GLuint VAObirb, VBObirb, EBObirb;
 
+
+b2Body* birbBody;
+
 GLuint Indices[] = {
 0, 1, 2,		0, 2, 3		// Front Face
 };
-
-
-Bird::Bird()
-{
-
-}
 
 void Bird::RenderBird()
 {
@@ -27,8 +24,8 @@ void Bird::RenderBird()
 	glActiveTexture(GL_TEXTURE0);
 	//glBindTexture(GL_TEXTURE_2D, Texture);
 	//Creating the transformation matrices
-	glm::mat4 TranslationMatrix = glm::translate(glm::mat4(), glm::vec3(bodyDef.position.x, bodyDef.position.y, 0.0f));
-	glm::mat4 RotationMatrix = glm::rotate(glm::mat4(),bodyDef.angle , glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 TranslationMatrix = glm::translate(glm::mat4(), glm::vec3(birbBody->GetPosition().x, birbBody->GetPosition().y, 0.0f));
+	glm::mat4 RotationMatrix = glm::rotate(glm::mat4(), birbBody->GetAngle(), glm::vec3(0.0f, 0.0f, 1.0f));
 	glm::mat4 ScaleMatrix = glm::scale(glm::mat4(), glm::vec3(50, 1, 5));
 
 	//Creating the MVP using the translation matrices and orthographic projection
@@ -53,6 +50,7 @@ void Bird::RenderBird()
 }
 
 
+
 void Bird::initBird(b2World* _World)
 {
 
@@ -62,7 +60,7 @@ void Bird::initBird(b2World* _World)
 	bodyDef.angle = 0;
 	bodyDef.active = true;
 
-	b2Body* dynamicBody = _World ->CreateBody(&bodyDef);
+	birbBody = _World ->CreateBody(&bodyDef);
 
 	birdShape.SetAsBox(5, 5);
 
@@ -72,7 +70,7 @@ void Bird::initBird(b2World* _World)
 	birdFixtureDef.friction = 1.0f;
 	birdFixtureDef.restitution = 0.0f;
 
-	dynamicBody->CreateFixture(&birdFixtureDef);
+	birbBody->CreateFixture(&birdFixtureDef);
 
 	//DEBUG
 	std::cout << "Got through all of the initilisation" << std::endl;
@@ -118,5 +116,14 @@ void Bird::initBird(b2World* _World)
 	//CleanUp (Unbinding)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+}
+
+
+//what the bird does from frame to frame
+void Bird::processBirb()
+{
+
+	birbBody->ApplyForce(b2Vec2(100, 0), birbBody->GetWorldCenter(), true);
 
 }

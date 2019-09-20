@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "BirdObject.h"
 #include "ContactListener.h"
+#include "GroundObject.h"
 
 enum LevelState
 {
@@ -36,4 +37,6 @@ private:
 	std::unique_ptr<b2World> World;
 
 	Bird* birb;
+	Ground* floor;
+	CInputManager* input;
 };

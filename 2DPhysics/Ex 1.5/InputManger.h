@@ -28,7 +28,7 @@ public:
 	static void ProcessKeyInput();
 	static void ProcessKeyInput(float _DeltaTime);
 
-	glm::vec2 GetMousePos() { return MousePos; }
+	b2Vec2 GetMousePos() { return MousePos; }
 
 	unsigned char ProcessKeys()
 	{
