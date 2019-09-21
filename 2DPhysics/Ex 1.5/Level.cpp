@@ -38,6 +38,7 @@ void Level::Init(int Level)
 	{
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400, 400), 0.0f, b2Vec2(10.0f, 10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(80, 400), 0.0f, b2Vec2(10.0f, 10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(80, 400), 0.0f, b2Vec2(10.0f, 10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		break;
 	}
 	case LEVELSTATE_2:
@@ -139,6 +140,8 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 			ObjectVect.push_back(BirdVect.back());
 			BirdVect.pop_back();
 			World->DestroyBody(m_nullBody);
+			b2BodyDef bodyDef;
+			m_nullBody = World->CreateBody(&bodyDef);
 		}
 		body = nullptr; //since this is a temp pointer, just making sure that we dont leave an unsafe pointer
 	}
