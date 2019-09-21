@@ -12,9 +12,4 @@ public:
 	virtual void PreSolve(b2Contact* contact, const b2Manifold* oldManifold);
 	virtual void PostSolve(b2Contact* contact, const b2Manifold* oldManifold);
 
-private:
-
-	DestroyAllTheThings* destroyThings;
-
-
 };

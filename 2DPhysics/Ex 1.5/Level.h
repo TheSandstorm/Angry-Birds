@@ -27,8 +27,10 @@ public:
 	void Init(int Level);
 	void Render();
 	void Process(float DeltaTime, CInputManager* _IM);
-	b2World* getWorld();
+
 	std::unique_ptr<b2World> World;
+
+	inline b2World* getWorld() { return World.get(); };
 	
 private:
 	b2Body* m_nullBody;

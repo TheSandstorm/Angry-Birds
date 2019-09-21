@@ -164,7 +164,3 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	}
 }
 
-b2World * Level::getWorld()
-{
-	return World.get();
-}

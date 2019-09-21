@@ -4,7 +4,7 @@
 #include "Level.h"
 #include <string>
 #include <iostream>
-
+#include "DestroyEntity.h"
 
 Listener::Listener() {
 
@@ -41,6 +41,8 @@ void Listener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold) {
 				else if (bodyUserDataB->ObjectType == "GlassBlock") {
 					std::cout << "Contact Glass\n";
 					bodyUserDataB->MarkForDestruction();
+
+					//Level::getWorld().destroyBody(contact->GetFixtureA()->GetBody());
 				}
 			}
 		}
@@ -51,14 +53,11 @@ void Listener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold) {
 				if (bodyUserDataA->ObjectType == "Pig") {
 					std::cout << "Contact Pig\n";
 					bodyUserDataA->MarkForDestruction();
-					destroyThings->destroyTheThings(contact->GetFixtureA()->GetBody());
-					
 				}
 
 				else if (bodyUserDataB->ObjectType == "Pig") {
 					std::cout << "Contact Pig\n";
 					bodyUserDataB->MarkForDestruction();
-					destroyThings->destroyTheThings(contact->GetFixtureB()->GetBody());
 				}
 			}
 		}
