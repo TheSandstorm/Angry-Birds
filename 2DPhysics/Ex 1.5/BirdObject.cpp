@@ -102,7 +102,7 @@ void Bird::initBird(b2World* _World)
 
 	birbBody = _World ->CreateBody(&bodyDef);
 
-	birdShape.SetAsBox(5, 5);
+	birdShape.SetAsBox(2, 2);
 
 	b2FixtureDef birdFixtureDef;
 	birdFixtureDef.shape = &birdShape;
@@ -164,39 +164,59 @@ void Bird::initBird(b2World* _World)
 //what the bird does from frame to frame
 void Bird::processBirb(b2World* _world, float x, float y)
 {
+#pragma region distance joint
+	
+	//birbBody->ApplyLinearImpulse(b2Vec2(10, 10), birbBody->GetWorldCenter(), true);
 
-	if (inputManager->MouseArray[MOUSE_LEFT] == HELD) {
+	b2DistanceJointDef jointDef;
+	jointDef.Initialize(birbBody, slingBody, birbBody->GetLocalCenter(), slingBody->GetLocalCenter());
+	jointDef.collideConnected = false;	jointDef.frequencyHz = 500.0f;
+	jointDef.dampingRatio = 1.0f;	b2DistanceJoint* m_distJoint = (b2DistanceJoint*)_world->CreateJoint(&jointDef);
+#pragma endregion
 
-		MouseJointDef.bodyA = slingBody;
-		MouseJointDef.bodyB = birbBody;
-		MouseJointDef.dampingRatio = 6.0f;
-		MouseJointDef.frequencyHz = 1.0f;
-		MouseJointDef.maxForce = (float)(100.0f);
-		MouseJointDef.target.Set(x, y);
-		MouseJointDef.collideConnected = false;
-		MouseJoint = (b2MouseJoint*)_world->CreateJoint(&MouseJointDef);
-		std::cout << "Created Joint" << std::endl;
+#pragma region revoluteJoint
 
 
-		if ((birbBody->GetPosition() - slingBody->GetPosition()).Length() >= 50.0f) {
-			b2Vec2 d = birbBody->GetPosition() - slingBody->GetPosition();
-			d.Normalize();
-			d *= 0.99f;
-			birbBody->SetTransform(d + slingBody->GetPosition(), 0.0f);
-			MouseJoint->SetTarget(d + slingBody->GetPosition());
-			std::cout << "follow Joint" << std::endl;
-		}
-		else {
-			MouseJoint->SetTarget(b2Vec2(x, y));
-			birbBody->ApplyLinearImpulse(b2Vec2(200.0f, 200.0f), birbBody->GetWorldCenter(), true);
-		}
-	}
-	else if (MouseJoint) {
-			_world->DestroyJoint(MouseJoint);
-			MouseJoint = nullptr;
-			std::cout << "destroy Joint" << std::endl;
-			birbBody->ApplyLinearImpulse(b2Vec2(400.0f, 200.0f), birbBody->GetWorldCenter(), true);
-		}
+	//b2RevoluteJointDef revoluteJointDef;
+	//revoluteJointDef.bodyA = birbBody;
+	//revoluteJointDef.bodyB = slingBody;
+	//revoluteJointDef.collideConnected = false;
+	//revoluteJointDef.localAnchorA.Set(2, 2);//the top right corner of the box
+	//revoluteJointDef.localAnchorB.Set(-5, -5);//center of the circle
+	//b2RevoluteJoint* m_joint = (b2RevoluteJoint*)_world->CreateJoint(&revoluteJointDef);	//revoluteJointDef.enableMotor = true;
+	//revoluteJointDef.maxMotorTorque = 15000;
+	//revoluteJointDef.motorSpeed = 9999999999;	//birbBody->ApplyAngularImpulse(1, true);	//birbBody->ApplyTorque(20, true); #pragma endregion	//	}			//
+
+			//MouseJointDef.bodyA = slingBody;
+			//MouseJointDef.bodyB = birbBody;
+			//MouseJointDef.dampingRatio = 6.0f;
+			//MouseJointDef.frequencyHz = 1.0f;
+			//MouseJointDef.maxForce = (float)(100.0f);
+			//MouseJointDef.target.Set(x, y);
+			//MouseJointDef.collideConnected = false;
+			//MouseJoint = (b2MouseJoint*)_world->CreateJoint(&MouseJointDef);
+			//std::cout << "Created Joint" << std::endl;
+
+
+		//	if ((birbBody->GetPosition() - slingBody->GetPosition()).Length() >= 50.0f) {
+		//		b2Vec2 d = birbBody->GetPosition() - slingBody->GetPosition();
+		//		d.Normalize();
+		//		d *= 0.99f;
+		//		birbBody->SetTransform(d + slingBody->GetPosition(), 0.0f);
+		//		MouseJoint->SetTarget(d + slingBody->GetPosition());
+		//		std::cout << "follow Joint" << std::endl;
+		//	}
+		//	else {
+		//		MouseJoint->SetTarget(b2Vec2(x, y));
+		//		birbBody->ApplyLinearImpulse(b2Vec2(200.0f, 200.0f), birbBody->GetWorldCenter(), true);
+		//	}
+		//}
+		//else if (MouseJoint) {
+		//		_world->DestroyJoint(MouseJoint);
+		//		MouseJoint = nullptr;
+		//		std::cout << "destroy Joint" << std::endl;
+		//		birbBody->ApplyLinearImpulse(b2Vec2(400.0f, 200.0f), birbBody->GetWorldCenter(), true);
+			//}
 }
 
 
@@ -205,19 +225,19 @@ void Bird::initSlingShot(b2World * _World)
 {
 
 	//setting the bird to be a dynamic rigidbody
-	slingBodyDef.type = b2_staticBody;
-	slingBodyDef.position.Set(450, 450);
+	slingBodyDef.type = b2_dynamicBody;
+	slingBodyDef.position.Set(600, 600);
 	slingBodyDef.angle = 0;
 	slingBodyDef.active = true;
 	slingBodyDef.gravityScale = 0;
 
 	slingBody = _World->CreateBody(&slingBodyDef);
 
-	slingShape.SetAsBox(5, 5);
+	slingShape.SetAsBox(2, 2);
 
 	b2FixtureDef slingFixtureDef;
 	slingFixtureDef.shape = &slingShape;
-	slingFixtureDef.density = 1.0f;
+	slingFixtureDef.density = 500.0f;
 	slingFixtureDef.friction = 1.0f;
 	slingFixtureDef.restitution = 0.0f;
 
