@@ -165,21 +165,38 @@ void Bird::initBird(b2World* _World)
 void Bird::processBirb(b2World* _world, float x, float y)
 {
 
-	if (inputManager->MouseArray[MOUSE_LEFT] == HELD) {	
+	if (inputManager->MouseArray[MOUSE_LEFT] == HELD) {
 
 		MouseJointDef.bodyA = slingBody;
 		MouseJointDef.bodyB = birbBody;
-		MouseJointDef.dampingRatio = 1.0f;
-		MouseJointDef.frequencyHz = 200;
-		MouseJointDef.maxForce = (float)(400.0f * birbBody->GetMass());
-		MouseJointDef.target.Set(x,y);
-		//MouseJointDef.collideConnected = true;
-		MouseJoint = (b2MouseJoint*)_world->CreateJoint(&MouseJointDef);
+		MouseJointDef.dampingRatio = 6.0f;
+		MouseJointDef.frequencyHz = 1.0f;
+		MouseJointDef.maxForce = (float)(100.0f);
 		MouseJointDef.target.Set(x, y);
+		MouseJointDef.collideConnected = false;
+		MouseJoint = (b2MouseJoint*)_world->CreateJoint(&MouseJointDef);
+		std::cout << "Created Joint" << std::endl;
+
+
+		if ((birbBody->GetPosition() - slingBody->GetPosition()).Length() >= 50.0f) {
+			b2Vec2 d = birbBody->GetPosition() - slingBody->GetPosition();
+			d.Normalize();
+			d *= 0.99f;
+			birbBody->SetTransform(d + slingBody->GetPosition(), 0.0f);
+			MouseJoint->SetTarget(d + slingBody->GetPosition());
+			std::cout << "follow Joint" << std::endl;
+		}
+		else {
+			MouseJoint->SetTarget(b2Vec2(x, y));
+			birbBody->ApplyLinearImpulse(b2Vec2(200.0f, 200.0f), birbBody->GetWorldCenter(), true);
+		}
 	}
-	else if (inputManager->MouseArray[MOUSE_LEFT] == RELEASED) {
-		//_world->DestroyJoint(MouseJoint);
-	}
+	else if (MouseJoint) {
+			_world->DestroyJoint(MouseJoint);
+			MouseJoint = nullptr;
+			std::cout << "destroy Joint" << std::endl;
+			birbBody->ApplyLinearImpulse(b2Vec2(400.0f, 200.0f), birbBody->GetWorldCenter(), true);
+		}
 }
 
 
