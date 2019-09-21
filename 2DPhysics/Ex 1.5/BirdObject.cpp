@@ -179,7 +179,7 @@ void Bird::Render()
 
 	//Creating the MVP using the translation matrices and orthographic projection
 	glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
-	glm::mat4 proj = glm::ortho(0.0f, float(Utility::SCR_WIDTH), 0.0f, float(Utility::SCR_HEIGHT)); // Camera needs to replace this
+	glm::mat4 proj = glm::ortho(0.0f, float(Utility::SCR_WIDTH) / float(Utility::Ratio), 0.0f, float(Utility::SCR_HEIGHT) / float(Utility::Ratio)); // Camera needs to replace this
 	glm::mat4 MVP = proj * ModelMatrix;
 
 

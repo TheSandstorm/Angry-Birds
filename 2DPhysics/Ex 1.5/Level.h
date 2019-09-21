@@ -4,6 +4,7 @@
 #include "MeshManager.h"
 #include "BirdObject.h"
 #include "BoxObject.h"
+#include "GroundObject.h"
 #include "Object.h"
 #include "ContactListener.h"
 

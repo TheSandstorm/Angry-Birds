@@ -11,6 +11,7 @@ namespace Utility
 {
 	const unsigned int SCR_WIDTH = 1600;
 	const unsigned int SCR_HEIGHT = 800;
+	const unsigned int Ratio = 120;
 	const b2Vec2 Gravity(0.0f, -9.8f);
 	const std::string SingleColorShaderFrag = "Resources/Shaders/SingleColorShader.fs";
 	const std::string FogShaderVert = "Resources/Shaders/FogObjectShader.vs";

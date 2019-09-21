@@ -2,7 +2,7 @@
 
 Level::Level()
 {
-	SlingShotPos = b2Vec2(800.f, 400.f);
+	SlingShotPos = b2Vec2(1.5f, 1.5f);
 	World = std::make_unique<b2World>(Utility::Gravity);
 	ContactListener = new Listener;
 	World->SetContactListener(&*ContactListener);
@@ -36,9 +36,10 @@ void Level::Init(int Level)
 	}
 	case LEVELSTATE_1:
 	{
-		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400, 400), 0.0f, b2Vec2(10.0f, 10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
-		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(80, 400), 0.0f, b2Vec2(10.0f, 10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
-		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(80, 400), 0.0f, b2Vec2(10.0f, 10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		ObjectVect.push_back(std::make_shared<Ground>(Transform(b2Vec2(0.0f, 0.0f), 0.0f, b2Vec2(2000.0f, 0.000001f)), b2_staticBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(9.0f, 0.22f), 0.0f, b2Vec2(0.07f, 0.1f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(1.8f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(2.4f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		break;
 	}
 	case LEVELSTATE_2:
@@ -83,8 +84,8 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	World->Step(DeltaTime, 20, 20);
 	World->ClearForces();
 
-	float MouseX = _IM->GetMousePos().x;
-	float MouseY = _IM->GetMousePos().y;
+	float MouseX = _IM->GetMousePos().x/Utility::Ratio;
+	float MouseY = ((Utility::SCR_HEIGHT -_IM->GetMousePos().y)/Utility::Ratio);
 	
 	//Put this into a function
 	if (BirdVect.size() != 0)
@@ -92,7 +93,7 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 		b2Body* body = BirdVect.back()->GetBody();
 		//Create the mouse joint and initialize it
 		if (CInputManager::MouseArray[MOUSE_LEFT] == FIRST_PRESSED && MouseJoint == nullptr) {
-			BirdVect.back()->SetPosition(b2Vec2(MouseX, MouseY));
+			//BirdVect.back()->SetPosition(b2Vec2(MouseX, MouseY));
 			body->SetTransform(b2Vec2(MouseX, MouseY), 0.0f);
 			body->SetAwake(false);
 			MouseDef.bodyA = m_nullBody;
@@ -108,17 +109,16 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 
 		//Move the mouse joint in relation to the mouse pos
 		if (CInputManager::MouseArray[MOUSE_LEFT] == HELD && MouseJoint != nullptr) {
-			if ((body->GetPosition() - SlingShotPos).Length() >= 100.0f) {
+			if ((body->GetPosition() - SlingShotPos).Length() >= 1.0f) {
 				b2Vec2 d = body->GetPosition() - SlingShotPos;
 				d.Normalize();
-				d *= 0.99f;
-				BirdVect.back()->SetPosition(d + SlingShotPos);
+				//BirdVect.back()->SetPosition(d + SlingShotPos);
 				body->SetTransform(d + SlingShotPos, 0.0f);				
 				MouseJoint->SetTarget(d + SlingShotPos);
 			}
 			else {
 				MouseJoint->SetTarget(b2Vec2(MouseX, MouseY));
-				BirdVect.back()->SetPosition(b2Vec2(MouseX, MouseY));
+				//BirdVect.back()->SetPosition(b2Vec2(MouseX, MouseY));
 			}
 		}
 
