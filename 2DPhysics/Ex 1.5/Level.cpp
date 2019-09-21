@@ -92,6 +92,7 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 		b2Body* body = BirdVect.back()->GetBody();
 		//Create the mouse joint and initialize it
 		if (CInputManager::MouseArray[MOUSE_LEFT] == FIRST_PRESSED && MouseJoint == nullptr) {
+			BirdVect.back()->SetPosition(b2Vec2(MouseX, MouseY));
 			body->SetTransform(b2Vec2(MouseX, MouseY), 0.0f);
 			body->SetAwake(false);
 			MouseDef.bodyA = m_nullBody;
@@ -111,11 +112,13 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 				b2Vec2 d = body->GetPosition() - SlingShotPos;
 				d.Normalize();
 				d *= 0.99f;
-				body->SetTransform(d + SlingShotPos, 0.0f);
+				BirdVect.back()->SetPosition(d + SlingShotPos);
+				body->SetTransform(d + SlingShotPos, 0.0f);				
 				MouseJoint->SetTarget(d + SlingShotPos);
 			}
 			else {
 				MouseJoint->SetTarget(b2Vec2(MouseX, MouseY));
+				BirdVect.back()->SetPosition(b2Vec2(MouseX, MouseY));
 			}
 		}
 

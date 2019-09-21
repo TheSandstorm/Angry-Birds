@@ -197,3 +197,8 @@ void Bird::Render()
 	glBindVertexArray(0);
 	glUseProgram(0);
 }
+
+void Bird::SetPosition(b2Vec2 _Pos)
+{
+	TransformSelf.Position = _Pos;
+}
