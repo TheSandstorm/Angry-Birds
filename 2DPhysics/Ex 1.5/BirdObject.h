@@ -16,7 +16,9 @@ public:
 	Bird();
 	void RenderBird();
 	void initBird(b2World* _World);
-	void processBirb();
+	void processBirb(b2World* _world, float x, float y);
+	void initSlingShot(b2World* _World);
+
 
 private:
 	Transform transform;

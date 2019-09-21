@@ -28,8 +28,9 @@ public:
 	static void ProcessKeyInput();
 	static void ProcessKeyInput(float _DeltaTime);
 
-	b2Vec2 GetMousePos() { return MousePos; }
-
+	glm::vec2 GetMousePos() { return MousePos; }
+	float GetMousePosX();
+	float GetMousePosY();
 	unsigned char ProcessKeys()
 	{
 		glutKeyboardFunc(CInputManager::NormKeyDown);

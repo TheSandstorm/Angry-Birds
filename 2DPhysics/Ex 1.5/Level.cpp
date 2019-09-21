@@ -31,6 +31,7 @@ void Level::Init(int Level)
 	{
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(400,400), 0.0f, b2Vec2(10.0f,10.0f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		birb->initBird(World.get());
+		birb->initSlingShot(World.get());
 
 		break;
 	
@@ -66,7 +67,7 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 
 	//Does a step of the world. Might need to become a fixed update loop instead of where it is now
 	World->Step(DeltaTime, 2, 2);
-	birb->processBirb();
+	birb->processBirb(World.get(), input->GetMousePosX(), input->GetMousePosY());
 	for (unsigned int i = 0; i < ObjectVect.size(); i++)
 	{
 		ObjectVect[i]->Process();

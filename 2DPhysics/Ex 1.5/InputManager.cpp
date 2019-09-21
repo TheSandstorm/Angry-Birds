@@ -17,6 +17,17 @@ void CInputManager::ProcessKeyInput(float _DeltaTime)
 
 }
 
+float CInputManager::GetMousePosX()
+{
+	float x = MousePos.x;
+	return x;
+}
+
+float CInputManager::GetMousePosY()
+{
+	return MousePos.y;
+}
+
 //Menu input
 void CInputManager::ProcessKeyInput() {
 	glutSpecialFunc(CInputManager::SpecialKeyDown);
