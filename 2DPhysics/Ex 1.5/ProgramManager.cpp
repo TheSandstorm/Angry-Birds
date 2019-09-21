@@ -80,7 +80,7 @@ void CProgramManager::Update()
 	{
 		int TempOutput = NULL;
 		StartMenu->Process(TempOutput);
-		CInputManager::ProcessKeyInput();
+		IM->ProcessKeyInput();
 
 		switch (TempOutput)
 		{
@@ -102,7 +102,7 @@ void CProgramManager::Update()
 	{
 		int TempOutput = NULL;
 		LevelSelect->Process(TempOutput);
-		CInputManager::ProcessKeyInput();
+		IM->ProcessKeyInput();
 
 		switch (TempOutput)
 		{
@@ -130,7 +130,7 @@ void CProgramManager::Update()
 	{
 		int TempOutput = NULL;
 		OptionMenu->Process(TempOutput);
-		CInputManager::ProcessKeyInput();
+		IM->ProcessKeyInput();
 
 		switch (TempOutput)
 		{
@@ -148,9 +148,9 @@ void CProgramManager::Update()
 	case LEVEL_1:
 	case LEVEL_2:
 	{
+		newGame->Process(IM);
 		IM->ProcessMouse();
 		IM->ProcessKeyInput();
-		newGame->Process(IM);
 		break;
 		//Process would go here
 	}
@@ -158,7 +158,7 @@ void CProgramManager::Update()
 	{
 		int TempOutput = NULL;
 		EndScreen->Process(TempOutput);
-		CInputManager::ProcessKeyInput();
+		IM->ProcessKeyInput();
 		switch (TempOutput)
 		{
 		case 0:

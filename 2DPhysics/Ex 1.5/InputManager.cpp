@@ -49,15 +49,17 @@ void CInputManager::ProcessKeyInput() {
 	}
 }
 
-void CInputManager::ProcessMouse()
+bool CInputManager::ProcessMouse()
 {
 	glutMouseFunc(MouseButton);
 	glutMotionFunc(MouseMovement);
 	glutPassiveMotionFunc(MouseMovement);
 	if (MouseArray[MOUSE_LEFT] == FIRST_PRESSED)
 	{
-		MouseArray[MOUSE_LEFT] = HELD;	
+		MouseArray[MOUSE_LEFT] = HELD;
+		return true;
 	}
+	return false;
 }
 
 void CInputManager::NormKeyDown(unsigned char key, int x, int y) {
