@@ -3,29 +3,27 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "Object.h"
-#include "InputManger.h"
-
-
-
-
-class Bird : Object
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+class Bird : public Object
 {
 public:
-
-
 	Bird();
-	void RenderBird();
-	void initBird(b2World* _World);
-	void processBirb(b2World* _world, float x, float y);
-	void initSlingShot(b2World* _World);
+	~Bird();
+	Bird(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram, GLuint _Texture);
 
+	void Init(b2World * _World);
+	void Process();
+	void Render();
+	void SetPosition(b2Vec2 _Pos);
 
+	b2Vec2 m_SpawnPos;
+	bool m_bEnableDecay;
+	
 private:
-	Transform transform;
-
-	MeshManager* meshmanage;
-	CInputManager* inputManager;
-
+	b2CircleShape CircleBody;
+	float m_Radius;
+	float m_fDecayTimer;
 };
 
 

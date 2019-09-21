@@ -48,7 +48,7 @@ public:
 		else return 'm';
 	}
 
-	void ProcessMouse();
+	bool ProcessMouse();
 
 
 	//Contains an array of all Special characters on a keyboard
