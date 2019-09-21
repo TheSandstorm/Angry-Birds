@@ -96,24 +96,32 @@ void Ground::Process()
 
 void Ground::Render()
 {
-	//Creating the transformation matrices
-	glm::mat4 TranslationMatrix = glm::translate(glm::mat4(), glm::vec3(BoxBody->GetPosition().x, BoxBody->GetPosition().y, 0.0f));
-	glm::mat4 RotationMatrix = glm::rotate(glm::mat4(), BoxBody->GetAngle(), glm::vec3(0.0f, 0.0f, 1.0f));
-	glm::mat4 ScaleMatrix = glm::scale(glm::mat4(), glm::vec3(1.0f, 1.0f, 10.0f));
-
-	//Creating the MVP using the translation matrices and orthographic projection
-	glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
-	glm::mat4 proj = glm::ortho(0.0f, float(Utility::SCR_HEIGHT / Utility::Ratio), 0.0f, float(Utility::SCR_HEIGHT / Utility::Ratio));			//Scaled down to accomodate for Box2D's unit measurements
-	glm::mat4 MVP = proj * ModelMatrix;
-
-	//Setting a memory pointer in the shader program to the MVP
-	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "MVP"), 1, GL_FALSE, glm::value_ptr(MVP));
-
-	//Binding appropriate buffers and rendering
-	glUseProgram(ShaderProgram);
-	glBindVertexArray(VAO);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDrawArrays(GL_LINE_LOOP, 0, 4);
-	glBindVertexArray(0);
+//
+//	//Creating the transformation matrices
+//	glm::mat4 TranslationMatrix = glm::translate(glm::mat4(), glm::vec3(BoxBody->GetPosition().x, BoxBody->GetPosition().y, 0.0f));
+//	glm::mat4 RotationMatrix = glm::rotate(glm::mat4(), BoxBody->GetAngle(), glm::vec3(0.0f, 0.0f, 1.0f));
+//	glm::mat4 ScaleMatrix = glm::scale(glm::mat4(), glm::vec3(1.0f, 1.0f, 10.0f));
+//
+//	//Creating the MVP using the translation matrices and orthographic projection
+//	glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
+//	glm::mat4 proj = glm::ortho(0.0f, float(Utility::SCR_HEIGHT / Utility::Ratio), 0.0f, float(Utility::SCR_HEIGHT / Utility::Ratio));			//Scaled down to accomodate for Box2D's unit measurements
+//	glm::mat4 MVP = proj * ModelMatrix;
+//
+//
+//	//Sending the texture to the GPU via uniform
+//	glUniform1i(glGetUniformLocation(ShaderProgram, "tex"), 0);
+//
+//	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(ModelMatrix));
+//	//Setting a memory pointer in the shader program to the MVP
+//	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "MVP"), 1, GL_FALSE, glm::value_ptr(MVP));
+//	glUniform3fv(glGetUniformLocation(ShaderProgram, "camPos"), 1, glm::value_ptr(glm::vec3(0, 0, 0)));
+//
+//	//Binding appropriate buffers and rendering
+//
+//	glUseProgram(ShaderProgram);
+//	glBindVertexArray(VAO);
+//	glEnable(GL_BLEND);
+//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//	glDrawArrays(GL_LINE_LOOP, 0, 4);
+//	glBindVertexArray(0);
 }
