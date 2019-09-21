@@ -1,6 +1,7 @@
 #include "ContactListener.h"
 #include "Box2D/Box2D.h"
 #include "Object.h"
+#include "Level.h"
 #include <string>
 #include <iostream>
 
@@ -30,7 +31,7 @@ void Listener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold) {
 		float force = oldManifold->points[0].normalImpulse;
 
 		//checking force of collisions against glass blocks
-		if (force > 0.9f) {
+		if (force > 0.0011f) {
 			if (bodyUserDataA && bodyUserDataB) {
 				if (bodyUserDataA->ObjectType == "GlassBlock") {
 					std::cout << "Contact Glass\n";
@@ -45,16 +46,19 @@ void Listener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold) {
 		}
 
 		//checking force of collisions against pigs
-		if (force > 0.6f) {
+		if (force > 0.11f) {
 			if (bodyUserDataA && bodyUserDataB) {
 				if (bodyUserDataA->ObjectType == "Pig") {
 					std::cout << "Contact Pig\n";
 					bodyUserDataA->MarkForDestruction();
+					destroyThings->destroyTheThings(contact->GetFixtureA()->GetBody());
+					
 				}
 
 				else if (bodyUserDataB->ObjectType == "Pig") {
 					std::cout << "Contact Pig\n";
 					bodyUserDataB->MarkForDestruction();
+					destroyThings->destroyTheThings(contact->GetFixtureB()->GetBody());
 				}
 			}
 		}

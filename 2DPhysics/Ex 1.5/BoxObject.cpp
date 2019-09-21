@@ -35,7 +35,7 @@ void Box::Init(b2World* _World)
 
 	////Data Set to object
 	Data = new ObjectData();
-	Data->ObjectType = "Block";
+	Data->ObjectType = "GlassBlock";
 
 	//Defining physics parameters for the fixture 
 	DynamicBox.SetAsBox(TransformSelf.Scale.x, TransformSelf.Scale.y);
@@ -120,7 +120,7 @@ void Box::Init(b2World* _World)
 void Box::Process()
 {
 	//moves the box to the right
-	BoxBody->ApplyLinearImpulse(b2Vec2(100, 0), BoxBody->GetWorldCenter(), true);
+	//BoxBody->ApplyLinearImpulse(b2Vec2(100, 0), BoxBody->GetWorldCenter(), true);
 }
 
 void Box::Render()

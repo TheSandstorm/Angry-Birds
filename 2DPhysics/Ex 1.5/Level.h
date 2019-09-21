@@ -9,6 +9,7 @@
 #include "BirdObject.h"
 #include "ContactListener.h"
 #include "GroundObject.h"
+#include "Enemy.h"
 
 enum LevelState
 {
@@ -26,6 +27,8 @@ public:
 	void Init(int Level);
 	void Render();
 	void Process(float DeltaTime, CInputManager* _IM);
+	b2World* getWorld();
+	std::unique_ptr<b2World> World;
 	
 private:
 	b2Body* m_nullBody;
@@ -33,11 +36,14 @@ private:
 	b2Vec2 SlingShotPos;
 	std::vector<std::shared_ptr<Object>> ObjectVect;
 	std::vector<std::shared_ptr<Bird>> BirdVect;
+	std::vector<std::shared_ptr<Enemy>> EnemyVect;
 	
+
+	Listener* ContactListener;
 	b2MouseJoint* MouseJoint;
 	b2MouseJointDef MouseDef;
-	Listener* ContactListener;
-	std::unique_ptr<b2World> World;
+
+
 
 	Bird* birb;
 	Ground* floor;

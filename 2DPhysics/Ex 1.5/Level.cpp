@@ -1,5 +1,7 @@
 #include "Level.h"
 
+ObjectData objdata;
+
 Level::Level()
 {
 	SlingShotPos = b2Vec2(1.5f, 1.5f);
@@ -37,9 +39,12 @@ void Level::Init(int Level)
 	case LEVELSTATE_1:
 	{
 		ObjectVect.push_back(std::make_shared<Ground>(Transform(b2Vec2(0.0f, 0.0f), 0.0f, b2Vec2(2000.0f, 0.000001f)), b2_staticBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
-		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(9.0f, 0.22f), 0.0f, b2Vec2(0.07f, 0.1f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(10.5f, 5.0f), 0.0f, b2Vec2(2.25f, 0.1f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(9.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(12.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(1.8f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(2.4f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
+		ObjectVect.push_back(std::make_shared<Enemy>(Transform(b2Vec2(9.5f, 0.5f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::WaterTexture.data())));
 		break;
 	
 	}
@@ -151,8 +156,15 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	}
 	for (unsigned int i = 0; i < ObjectVect.size(); i++)
 	{
+		if (objdata.IsMarkedForDestruction) {
+			World->DestroyBody((ObjectVect[i]->GetBody()));
+		}
 		ObjectVect[i]->Process();
+		
 	}
+}
 
-
+b2World * Level::getWorld()
+{
+	return World.get();
 }
