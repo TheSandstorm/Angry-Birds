@@ -61,10 +61,11 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 
 	//Does a step of the world. Might need to become a fixed update loop instead of where it is now
 	World->Step(DeltaTime, 2, 2);
+	//After all process are done clear forces
+	World->ClearForces();
 	for (unsigned int i = 0; i < ObjectVect.size(); i++)
 	{
 		ObjectVect[i]->Process();
 	}
-	//After all process are done clear forces
-	World->ClearForces();
+
 }
