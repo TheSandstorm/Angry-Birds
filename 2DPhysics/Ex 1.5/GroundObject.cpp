@@ -90,8 +90,10 @@ void Ground::Init(b2World* _World)
 	glBindVertexArray(0);
 }
 
-void Ground::Process()
+bool Ground::Process()
 {
+
+	return false;
 }
 
 void Ground::Render()

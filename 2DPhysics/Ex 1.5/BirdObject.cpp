@@ -285,8 +285,9 @@ void Bird::Init(b2World* _World)
 
 
 
-void Bird::Process()
+bool Bird::Process()
 {
+	return false;
 }
 
 

@@ -13,7 +13,7 @@ public:
 	Bird(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram, GLuint _Texture);
 
 	void Init(b2World * _World);
-	void Process();
+	bool Process();
 	void Render();
 	void SetPosition(b2Vec2 _Pos);
 

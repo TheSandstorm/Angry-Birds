@@ -11,7 +11,7 @@ public:
 	~Ground();
 
 	void Init(b2World* _World);
-	void Process();
+	bool Process();
 	void Render();
 protected:
 	b2PolygonShape DynamicBox;

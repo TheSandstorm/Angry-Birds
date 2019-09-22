@@ -117,8 +117,10 @@ void Box::Init(b2World* _World)
 
 }
 
-void Box::Process()
+bool Box::Process()
 {
+
+	return false;
 	//moves the box to the right
 	//BoxBody->ApplyLinearImpulse(b2Vec2(100, 0), BoxBody->GetWorldCenter(), true);
 }

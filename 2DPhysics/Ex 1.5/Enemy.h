@@ -17,7 +17,7 @@ public:
 	b2Vec2 m_SpawnPos;
 
 	void Init(b2World * _World);
-	void Process();
+	bool Process();
 	void Render();
 	void SetPosition(b2Vec2 _Pos);
 

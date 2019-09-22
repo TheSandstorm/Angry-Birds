@@ -44,13 +44,13 @@ void Level::Init(int Level)
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(12.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(1.8f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(2.4f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
-		ObjectVect.push_back(std::make_shared<Enemy>(Transform(b2Vec2(9.5f, 0.5f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::WaterTexture.data())));
+		//enemy
+		EnemyVect.push_back(std::make_shared<Enemy>(Transform(b2Vec2(9.5f, 0.5f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::WaterTexture.data())));
 		break;
 	
 	}
 	case LEVELSTATE_2:
 	{
-
 		break;
 	}
 	default:
@@ -61,7 +61,12 @@ void Level::Init(int Level)
 	{
 		it->Init(World.get());
 	}
+	//init the birds
 	for (auto it : BirdVect)
+	{
+		it->Init(World.get());
+	}
+	for (auto it : EnemyVect)
 	{
 		it->Init(World.get());
 	}
@@ -79,6 +84,10 @@ void Level::Render()
 	{
 		BirdVect[i]->Render();
 	}
+	for (unsigned int i = 0; i < EnemyVect.size(); i++)
+	{
+		EnemyVect[i]->Render();
+	}
 }
 
 void Level::Process(float DeltaTime, CInputManager* _IM)
@@ -93,6 +102,39 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	float MouseX = _IM->GetMousePos().x/Utility::Ratio;
 	float MouseY = ((Utility::SCR_HEIGHT -_IM->GetMousePos().y)/Utility::Ratio);
 	
+	for (unsigned int i = 0; i < ObjectVect.size(); i++)
+	{
+		if (ObjectVect[i]->Process() == true) {
+
+			ObjectVect.erase(ObjectVect.begin() + i);
+			World->DestroyBody((ObjectVect[i]->GetBody()));
+		}
+		else {
+			//return;
+		}
+
+	}
+
+
+	#pragma region revoluteJoint
+
+
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.bodyA = ObjectVect[1]->GetBody();
+	revoluteJointDef.bodyB = ObjectVect[2]->GetBody();
+	revoluteJointDef.collideConnected = false;
+	revoluteJointDef.localAnchorA.Set(2, 2);//the top right corner of the box
+	revoluteJointDef.localAnchorB.Set(-5, -5);//center of the circle
+	b2RevoluteJoint* m_joint = (b2RevoluteJoint*)World->CreateJoint(&revoluteJointDef);
+
+	revoluteJointDef.enableMotor = true;
+	revoluteJointDef.maxMotorTorque = 15000;
+	revoluteJointDef.motorSpeed = 9999999999;
+	ObjectVect[1]->GetBody()->ApplyAngularImpulse(1, true);
+	ObjectVect[1]->GetBody()->ApplyTorque(20, true);
+
+#pragma endregion
+
 	//Put this into a function
 	if (BirdVect.size() != 0)
 	{
@@ -154,13 +196,5 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 		}
 		body = nullptr; //since this is a temp pointer, just making sure that we dont leave an unsafe pointer
 	}
-	for (unsigned int i = 0; i < ObjectVect.size(); i++)
-	{
-		if (objdata.IsMarkedForDestruction) {
-			World->DestroyBody((ObjectVect[i]->GetBody()));
-		}
-		ObjectVect[i]->Process();
-		
-	}
-}
 
+}

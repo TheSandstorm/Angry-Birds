@@ -22,10 +22,11 @@ public:
 	b2Body* GetBody() { return BoxBody; };
 	
 	virtual void Init(b2World * _World) = 0;
-	virtual void Process() = 0;
+	virtual bool Process() = 0;
 	virtual void Render() = 0;
 
 	ObjectData* Data;
+
 
 protected:
 	int IndicesCount;

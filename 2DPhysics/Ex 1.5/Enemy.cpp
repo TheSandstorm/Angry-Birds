@@ -1,4 +1,8 @@
 #include "Enemy.h"
+
+
+ObjectData obj;
+
 Enemy::Enemy()
 {
 }
@@ -200,9 +204,14 @@ void Enemy::Init(b2World * _World)
 
 }
 
-void Enemy::Process()
+bool Enemy::Process()
 {
-
+	if (obj.IsMarkedForDestruction) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void Enemy::Render()

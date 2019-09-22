@@ -8,7 +8,7 @@ class Glass : public Box
 	Glass(Transform _transform, b2BodyType _Type);
 
 	void Init();
-	void Process();
+	bool Process();
 	void Render();
 
 };

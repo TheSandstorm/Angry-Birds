@@ -4,7 +4,7 @@ Game::Game(int _CurrentLevel)
 { 
 	CurrentLevel = _CurrentLevel;
 	CClock::GetInstance(); 
-	mLevel = new Level;
+	mLevel = new Level();
 }
 
 Game::~Game() 

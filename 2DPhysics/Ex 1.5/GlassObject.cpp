@@ -8,8 +8,9 @@ void Glass::Init()
 {
 }
 
-void Glass::Process()
+bool Glass::Process()
 {
+	return false;
 }
 
 void Glass::Render()

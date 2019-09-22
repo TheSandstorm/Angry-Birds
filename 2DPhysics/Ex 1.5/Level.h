@@ -17,7 +17,6 @@ enum LevelState
 	LEVELSTATE_1,
 	LEVELSTATE_2
 };
-
 class Level
 {
 public:
@@ -30,15 +29,23 @@ public:
 
 	std::unique_ptr<b2World> World;
 
-	inline b2World* getWorld() { return World.get(); };
-	
+	b2World* getWorld() { 
+		b2World* world = World.get();
+		return world; };
+
+	void destroyStuff(b2Body* body);
+
+	std::vector<std::shared_ptr<Object>> ObjectVect;
+	std::vector<std::shared_ptr<Bird>> BirdVect;
+	std::vector<std::shared_ptr<Enemy>> EnemyVect;
+
+
+
 private:
 	b2Body* m_nullBody;
 
 	b2Vec2 SlingShotPos;
-	std::vector<std::shared_ptr<Object>> ObjectVect;
-	std::vector<std::shared_ptr<Bird>> BirdVect;
-	std::vector<std::shared_ptr<Enemy>> EnemyVect;
+
 	
 
 	Listener* ContactListener;
@@ -51,3 +58,6 @@ private:
 	Ground* floor;
 	CInputManager* input;
 };
+
+
+
