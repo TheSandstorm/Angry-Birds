@@ -56,18 +56,12 @@ void Listener::PreSolve(b2Contact * contact, const b2Manifold * oldManifold) {
 				if (bodyUserDataA->ObjectType == "Pig") {
 					std::cout << "Contact Pig\n";
 					bodyUserDataA->MarkForDestruction();
-					//lev->getWorld()->DestroyBody(contact->GetFixtureA()->GetBody());
-					//lev->ObjectVect.erase(lev->ObjectVect.end());
-					//bodyA = nullptr;
 					
 				}
 
 				else if (bodyUserDataB->ObjectType == "Pig") {
 					std::cout << "Contact Pig\n";
 					bodyUserDataB->MarkForDestruction();
-					//lev->getWorld()->DestroyBody(contact->GetFixtureB()->GetBody());
-					//lev->ObjectVect.erase(lev->ObjectVect.end());
-					//bodyB = nullptr;
 				}
 			}
 		}

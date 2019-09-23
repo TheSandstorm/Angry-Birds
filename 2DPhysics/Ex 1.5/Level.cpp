@@ -42,10 +42,12 @@ void Level::Init(int Level)
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(10.5f, 5.0f), 0.0f, b2Vec2(2.25f, 0.1f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(9.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(12.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(12.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.25f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
+		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(12.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.0f)), b2_staticBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(1.8f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		BirdVect.push_back(std::make_shared<Bird>(Transform(b2Vec2(2.4f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::BlueSquareTexture.data())));
 		//enemy
-		EnemyVect.push_back(std::make_shared<Enemy>(Transform(b2Vec2(9.5f, 0.5f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::WaterTexture.data())));
+		ObjectVect.push_back(std::make_shared<Enemy>(Transform(b2Vec2(9.5f, 0.5f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::WaterTexture.data())));
 		break;
 	
 	}
@@ -120,19 +122,22 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 
 
 	b2RevoluteJointDef revoluteJointDef;
-	revoluteJointDef.bodyA = ObjectVect[1]->GetBody();
-	revoluteJointDef.bodyB = ObjectVect[2]->GetBody();
+	revoluteJointDef.bodyA = ObjectVect[4]->GetBody();
+	revoluteJointDef.bodyB = ObjectVect[5]->GetBody();
 	revoluteJointDef.collideConnected = false;
-	revoluteJointDef.localAnchorA.Set(2, 2);//the top right corner of the box
-	revoluteJointDef.localAnchorB.Set(-5, -5);//center of the circle
+	revoluteJointDef.localAnchorA.Set(1, 1);//the top right corner of the box
+	revoluteJointDef.localAnchorB.Set(2, 2);//center of the circle
 	b2RevoluteJoint* m_joint = (b2RevoluteJoint*)World->CreateJoint(&revoluteJointDef);
 
 	revoluteJointDef.enableMotor = true;
-	revoluteJointDef.maxMotorTorque = 15000;
-	revoluteJointDef.motorSpeed = 9999999999;
-	ObjectVect[1]->GetBody()->ApplyAngularImpulse(1, true);
-	ObjectVect[1]->GetBody()->ApplyTorque(20, true);
+	revoluteJointDef.maxMotorTorque = 100;
+	revoluteJointDef.motorSpeed = 200 * DeltaTime;
+	ObjectVect[3]->GetBody()->ApplyAngularImpulse(1, true);
+	ObjectVect[3]->GetBody()->ApplyTorque(20, true);
 
+#pragma endregion
+
+	#pragma region revoluteJoint
 #pragma endregion
 
 	//Put this into a function
