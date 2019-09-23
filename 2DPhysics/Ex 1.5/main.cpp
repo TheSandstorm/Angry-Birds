@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	glutSetOption(GLUT_MULTISAMPLE, 8);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
-	glutInitWindowPosition(50, 50);
+	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(ScreenInfo::SCR_HEIGHT, ScreenInfo::SCR_WIDTH);
 	glutCreateWindow("MEME Birds HD");
 	glEnable(GL_MULTISAMPLE);

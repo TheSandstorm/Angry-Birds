@@ -20,6 +20,7 @@ void Game::Process(CInputManager* _IM)
 	//Could Add a pause menu around here
 	if (CInputManager::KeyArray['r'] == FIRST_PRESSED)
 	{
+		mLevel = new Level();
 		this->Init();
 		//Restart the level
 	}

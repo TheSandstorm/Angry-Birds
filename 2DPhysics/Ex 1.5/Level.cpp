@@ -38,7 +38,7 @@ void Level::Init(int Level)
 	}
 	case LEVELSTATE_1:
 	{
-		ObjectVect.push_back(std::make_shared<Ground>(Transform(b2Vec2(0.0f, 0.0f), 0.0f, b2Vec2(2000.0f, 0.000001f)), b2_staticBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
+		ObjectVect.push_back(std::make_shared<Ground>(Transform(b2Vec2(0.0f, 0.0f), 0.0f, b2Vec2(20.0f, 0.000001f)), b2_staticBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(10.5f, 5.0f), 0.0f, b2Vec2(2.25f, 0.1f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(9.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
 		ObjectVect.push_back(std::make_shared<Box>(Transform(b2Vec2(12.0f, 1.0f), 0.0f, b2Vec2(0.1f, 0.5f)), b2_dynamicBody, MeshManager::GetShaderProgram(Shader_Attributes::STANDARD_SHADER), MeshManager::SetTexture(TexturePaths::TestTexture.data())));
@@ -98,13 +98,13 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 	//if released then destory joint.
 
 	//Does a step of the world. Might need to become a fixed update loop instead of where it is now
-	World->Step(DeltaTime, 20, 20);
+	World->Step(DeltaTime, 10, 10);
 	World->ClearForces();
 
 
-	float MouseX = _IM->GetMousePos().x/Utility::Ratio;
+	float MouseX = float(_IM->GetMousePos().x/Utility::Ratio);
 
-	float MouseY = ((Utility::SCR_HEIGHT -_IM->GetMousePos().y)/Utility::Ratio);
+	float MouseY = float((Utility::SCR_HEIGHT -_IM->GetMousePos().y)/Utility::Ratio);
 	
 	std::vector<std::shared_ptr<Object>>::iterator it = ObjectVect.begin();
 	while (it != ObjectVect.end()) {
@@ -187,6 +187,8 @@ void Level::Process(float DeltaTime, CInputManager* _IM)
 				b2Vec2 d = body->GetPosition() - SlingShotPos;
 
 				d.Normalize();
+
+				d *= 0.99f;
 
 				//BirdVect.back()->SetPosition(d + SlingShotPos);
 
