@@ -1,14 +1,19 @@
 #pragma once
-#include "BoxObject.h"
+#include "Object.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-class Glass : public Box
+class Glass : public Object
 {
+public:
 	Glass();
 	~Glass();
-	Glass(Transform _transform, b2BodyType _Type);
+	Glass(Transform _Transform, b2BodyType _Type, GLuint _ShaderProgram, GLuint _Texture);
 
-	void Init();
+	void Init(b2World * _World);
 	bool Process();
 	void Render();
+protected:
+	b2PolygonShape DynamicBox;
 
 };

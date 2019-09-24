@@ -6,6 +6,7 @@
 #include "BoxObject.h"
 #include "GroundObject.h"
 #include "Object.h"
+#include "GlassObject.h"
 #include "BirdObject.h"
 #include "ContactListener.h"
 #include "GroundObject.h"
@@ -45,7 +46,6 @@ private:
 	b2Body* m_nullBody;
 
 	b2Vec2 SlingShotPos;
-
 	
 
 	Listener* ContactListener;

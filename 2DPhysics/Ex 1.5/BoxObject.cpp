@@ -35,7 +35,8 @@ void Box::Init(b2World* _World)
 
 	////Data Set to object
 	Data = new ObjectData();
-	Data->ObjectType = "GlassBlock";
+	Data->ObjectType = "Block";
+	BoxBody->SetUserData(Data);
 
 	//Defining physics parameters for the fixture 
 	DynamicBox.SetAsBox(TransformSelf.Scale.x, TransformSelf.Scale.y);

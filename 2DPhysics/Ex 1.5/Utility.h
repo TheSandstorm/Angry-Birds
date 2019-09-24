@@ -31,7 +31,9 @@ namespace TexturePaths
 	const std::string CubeMapTexture = "Resources/Textures/CubeMap/";
 	const std::string WaterTexture = "Resources/Textures/Water.png";
 	const std::string BlueSquareTexture = "Resources/Textures/Bluesquare.png";
+	const std::string GlassTexture = "Resources/Textures/Glass.jpg";
 	const std::string TestTexture = "Resources/Textures/desert.jpg";
+
 }
 
 namespace SoundnFonts
